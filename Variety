@@ -30,7 +30,7 @@ def plot_fft(signal, sample_rate, max_freq=1000):
     plt.ylabel('Normalized Amplitude')
     plt.grid(True)
     plt.title('FFT Analysis')
-    plt.show()
+    plt.show(block=False)
 
 def plot_time_domain(signal, sample_rate):
     time = np.arange(len(signal)) / sample_rate
@@ -40,7 +40,7 @@ def plot_time_domain(signal, sample_rate):
     plt.ylabel('Amplitude')
     plt.grid(True)
     plt.title('Time Domain Signal')
-    plt.show()
+    plt.show(block=False)
 
 def plot_psd(signal, sample_rate):
     freqs, psd = welch(signal, sample_rate)
@@ -50,26 +50,7 @@ def plot_psd(signal, sample_rate):
     plt.ylabel('Power Spectral Density (V^2/Hz)')
     plt.grid(True)
     plt.title('Power Spectral Density')
-    plt.show()
-
-def plot_spectrogram(signal, sample_rate):
-    plt.figure(figsize=(10, 6))
-    plt.specgram(signal, NFFT=256, Fs=sample_rate, noverlap=128, cmap='viridis')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Frequency (Hz)')
-    plt.colorbar(label='Intensity (dB)')
-    plt.title('Spectrogram')
-    plt.show()
-
-
-def plot_histogram(signal):
-    plt.figure(figsize=(10, 6))
-    plt.hist(signal, bins=50)
-    plt.xlabel('Amplitude')
-    plt.ylabel('Frequency')
-    plt.grid(True)
-    plt.title('Histogram of Amplitudes')
-    plt.show()
+    plt.show(block=False)
 
 # Load the data
 signal = np.load(local_filename)
@@ -79,5 +60,6 @@ sample_rate = 1000  # Adjust this to the correct sample rate for your data
 plot_time_domain(signal, sample_rate)
 plot_fft(signal, sample_rate)
 plot_psd(signal, sample_rate)
-plot_spectrogram(signal, sample_rate)
-plot_histogram(signal)
+
+# Keep the plots open
+plt.show()
